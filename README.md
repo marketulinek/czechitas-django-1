@@ -1,2 +1,2 @@
-# czechitas-django-1
-Online semestral course
+# Czechitas - Django 1
+Online semestral course - ongoing
