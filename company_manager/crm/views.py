@@ -1,4 +1,3 @@
-from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, TemplateView
 import crm.models as models
 from django.urls import reverse_lazy
@@ -22,3 +21,8 @@ class OpportunityCreateView(CreateView):
     template_name = 'opportunity/create.html'
     fields = ['company', 'sales_manager', 'primary_contact', 'description']
     success_url = reverse_lazy('index')
+
+class OpportunityListView(ListView):
+    model = models.Opportunity
+    template_name = 'opportunity/list.html'
+    fields = ['company', 'sales_manager', 'primary_contact', 'description']

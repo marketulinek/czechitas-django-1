@@ -1,0 +1,22 @@
+<h2>Seznam obchodních případů</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Firma</th>
+            <th>Sales manager</th>
+            <th>Kontakt</th>
+            <th>Popis</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in object_list %}
+        <tr>
+            <td>{{ item.company }}</td>
+            <td>{{ item.sales_manager }}</td>
+            <td>{{ item.primary_contact }}</td>
+            <td>{{ item.description }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
