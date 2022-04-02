@@ -16,3 +16,9 @@ class CompanyListView(ListView):
     model = models.Company
     template_name = 'company/list.html'
     fields = ['name', 'status']
+
+class OpportunityCreateView(CreateView):
+    model = models.Opportunity
+    template_name = 'opportunity/create.html'
+    fields = ['company', 'sales_manager', 'primary_contact', 'description']
+    success_url = reverse_lazy('index')
