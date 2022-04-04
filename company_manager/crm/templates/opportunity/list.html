@@ -7,6 +7,7 @@
             <th>Sales manager</th>
             <th>Kontakt</th>
             <th>Popis</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -16,6 +17,7 @@
             <td>{{ item.sales_manager }}</td>
             <td>{{ item.primary_contact }}</td>
             <td>{{ item.description }}</td>
+            <td>{{ item.get_status_display }}</td>
         </tr>
         {% endfor %}
     </tbody>
