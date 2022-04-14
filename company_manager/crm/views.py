@@ -14,7 +14,7 @@ class CompanyCreateView(CreateView):
 class CompanyListView(ListView):
     model = models.Company
     template_name = 'company/list.html'
-    fields = ['name', 'status']
+    fields = ['name', 'status', 'phone_number', 'email', 'address']
 
 class OpportunityCreateView(CreateView):
     model = models.Opportunity
