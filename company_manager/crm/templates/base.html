@@ -7,6 +7,7 @@
     <!--<link rel="stylesheet" href="styles.css" />-->
     <style>
         h1 { font-family: "Courier New"; text-align: center; margin: 50px; }
+        h2 { font-family: "Courier New"; margin-top: 20px; }
 
         .navbar {
             background-color: #e6007e;
@@ -30,6 +31,8 @@
         .nav-item { border-bottom: 1px solid transparent; }
         .nav-link, .nav-link:hover { color: white; }
         .nav-item:hover:not(.disabled) { border-bottom: 1px solid white; }
+
+        .table-hover tbody tr:hover { background-color: rgba(141, 0, 126, 0.1); }
     </style>
 </head>
 <body>
@@ -42,7 +45,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Companies</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'company_list' %}">Companies</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Opportunities</a>
