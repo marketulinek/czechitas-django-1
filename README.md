@@ -1,6 +1,6 @@
 # Czechitas - Django 1
 
-:female-construction-worker: :hammer: :mortar_board: :male-construction-worker: Training project of Django semestral course - ongoing
+:female_construction_worker: :hammer: :mortar_board: Training project of Django semestral course - ongoing
 
 > Company Manager System for managing business cases
 
@@ -12,7 +12,6 @@
 # Install the dependencies
 pip install -r requirements.txt
 ```
-
 ### Development
 To run project on your localhost:
 ```
