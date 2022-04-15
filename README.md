@@ -1,13 +1,13 @@
 # Czechitas - Django 1
 
-:female-construction-worker: Training project of Django semestral course - ongoing
+:female-construction-worker: :hammer: :mortar_board: :male-construction-worker: Training project of Django semestral course - ongoing
 
 > Company Manager System for managing business cases
 
 ## Getting Started
-
-### Installing
 :snake: Python 3.9 required
+
+### Dependency
 ```
 # Install the dependencies
 pip install -r requirements.txt
