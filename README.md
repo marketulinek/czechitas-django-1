@@ -1,6 +1,6 @@
 # Czechitas - Django 1
 
-:female_construction_worker: :hammer: :mortar_board: Training project of Django semestral course - ongoing
+:mortar_board: Training project of Django semestral course - ongoing :hammer:
 
 > Company Manager System for managing business cases
 
