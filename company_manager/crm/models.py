@@ -23,12 +23,7 @@ class Company(models.Model):
     email = models.CharField(max_length=100, null=True, blank=True)
     identification_number = models.CharField(max_length=100)
     address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return self.name
-    
-    class Meta:
-        verbose_name_plural = 'Companies'
+    www = models.CharField(max_length=100, null=True, blank=True)
 
 class Contact(models.Model):
     primary_company = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True)
@@ -53,6 +48,3 @@ class Opportunity(models.Model):
     description = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=2, default='1', choices=status_choices)
     rating = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
-
-    class Meta:
-        verbose_name_plural = 'Opportunities'
