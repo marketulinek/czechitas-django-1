@@ -5,6 +5,7 @@ class Address(models.Model):
     street = models.CharField(max_length=200, blank=True, null=True)
     zip_code = models.CharField(max_length=10, blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, null=True)
+    country = models.CharField(max_length=100, blank=True, null=True)
 
 class Company(models.Model):
     status_choices = (
