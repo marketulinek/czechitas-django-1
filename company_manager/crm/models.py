@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.mail import send_mail
 
 
 class Address(models.Model):
@@ -72,3 +73,12 @@ class Employee(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Employee.objects.create(user=instance)
+
+@receiver(post_save, sender=Opportunity)
+def create_opportunity(sender, instance, created, **kwargs):
+    if created:
+        subject = 'New Opportunity'
+        message = 'Hello, new opportunity was created. Bye.'
+        from_email = 'robot@cm.cz'
+        recipient_list = ['sales_manager@czechitas.cz']
+        send_mail(subject, message, from_email, recipient_list)
