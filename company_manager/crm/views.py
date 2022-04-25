@@ -7,7 +7,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 class IndexView(TemplateView):
     template_name = 'index.html'
 
-class CompanyCreateView(LoginRequiredMixin, CreateView):
+class CompanyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = models.Company
     template_name = 'company/create_company.html'
     fields = ['name', 'status', 'phone_number', 'email', 'identification_number']
@@ -19,7 +19,7 @@ class CompanyListView(ListView):
     template_name = 'company/list.html'
     fields = ['name', 'status', 'phone_number', 'email', 'address']
 
-class OpportunityCreateView(PermissionRequiredMixin, CreateView):
+class OpportunityCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     permission_required = 'crm.add_opportunity'
     model = models.Opportunity
     template_name = 'opportunity/create.html'
