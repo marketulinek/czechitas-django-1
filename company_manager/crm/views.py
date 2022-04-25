@@ -33,7 +33,7 @@ class OpportunityListView(ListView):
     fields = ['company', 'sales_manager', 'primary_contact', 'description']
 
 class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    fields = ['department']
+    fields = ['department', 'office_number', 'supervisor']
     template_name = 'employee/update_employee.html'
     success_url = reverse_lazy('index')
     success_message = 'Data was updated successfully'
