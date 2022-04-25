@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, TemplateView
+from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 import crm.models as models
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -28,3 +28,11 @@ class OpportunityListView(ListView):
     model = models.Opportunity
     template_name = 'opportunity/list.html'
     fields = ['company', 'sales_manager', 'primary_contact', 'description']
+
+class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
+    fields = ['department']
+    template_name = 'employee/update_employee.html'
+    success_url = reverse_lazy('index')
+
+    def get_object(self, queryset=None):
+        return self.request.user.employee
