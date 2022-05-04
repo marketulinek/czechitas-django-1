@@ -38,5 +38,6 @@ class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('index')
     success_message = 'Data was updated successfully'
 
+    # The logged-in user can edit himself 
     def get_object(self, queryset=None):
         return self.request.user.employee
