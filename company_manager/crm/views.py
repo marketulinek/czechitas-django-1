@@ -32,6 +32,11 @@ class OpportunityListView(ListView):
     template_name = 'opportunity/list.html'
     fields = ['company', 'sales_manager', 'primary_contact', 'description']
 
+class EmployeeListView(ListView):
+    model = models.Employee
+    template_name = 'employee/list.html'
+    fields = ['department', 'office_number', 'supervisor']
+
 class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     fields = ['department', 'office_number', 'supervisor']
     template_name = 'employee/update_employee.html'

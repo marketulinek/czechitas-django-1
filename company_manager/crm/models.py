@@ -69,6 +69,9 @@ class Employee(models.Model):
     office_number = models.CharField(max_length=20, blank=True, null=True)
     supervisor = models.ForeignKey("Employee", on_delete=models.SET_NULL, null=True, blank=True)
 
+    def __str__(self):
+        return f'[{self.department}] {self.user.username}'
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
