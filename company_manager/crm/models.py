@@ -80,7 +80,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Opportunity)
 def create_opportunity(sender, instance, created, **kwargs):
     if created:
-        subject = 'New Opportunity'
+        subject = 'New Opportunity - ' + instance.company.name
         message = 'Hello, new opportunity was created. Bye.'
         from_email = 'robot@cm.cz'
         recipient_list = ['sales_manager@czechitas.cz']
