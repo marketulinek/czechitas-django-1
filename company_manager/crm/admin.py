@@ -2,12 +2,26 @@ from django.contrib import admin
 import crm.models as models
 
 class CompanyAdmin(admin.ModelAdmin):
-    fields = ['name', 'phone_number', 'email', 'address', 'status', 'identification_number']
-    readonly_fields = ['status', 'identification_number']
-    list_display = ['name', 'status']
-    list_filter = ['status']
-    search_fields = ['name', 'email', 'identification_number', 'opportunity__description']
+    fields = ['name', 'phone_number', 'email', 'address', 'status', 'identification_number', 'www']
+    readonly_fields = ['name', 'status', 'identification_number']
+    list_display = ['name', 'status', 'email', 'www']
+    list_filter = ['status', ['email', admin.EmptyFieldListFilter], ['www', admin.EmptyFieldListFilter]]
+    search_fields = ['name', 'email', 'identification_number', 'opportunity__description', 'www']
+
+class OpportunityAdmin(admin.ModelAdmin):
+    fields = ['company', 'sales_manager', 'description', 'status', 'rating', 'created_at']
+    readonly_fields = ['rating', 'created_at']
+    list_display = ['created_at', 'company', 'sales_manager', 'description', 'status', 'rating']
+    list_filter = ['sales_manager', 'status']
+    search_fields = ['company', 'sales_manager', 'description']
+
+class EmployeeAdmin(admin.ModelAdmin):
+    fields = ['user', 'department', 'supervisor']
+    readonly_fields = ['user']
+    list_display = ['__str__', 'department', 'supervisor']
+    list_filter = ['department']
+    search_fields = ['user__last_name', 'user__first_name', 'department']
 
 admin.site.register(models.Company, CompanyAdmin)
-admin.site.register(models.Opportunity)
-admin.site.register(models.Employee)
+admin.site.register(models.Opportunity, OpportunityAdmin)
+admin.site.register(models.Employee, EmployeeAdmin)
