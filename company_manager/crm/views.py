@@ -24,13 +24,14 @@ class OpportunityCreateView(PermissionRequiredMixin, SuccessMessageMixin, Create
     model = models.Opportunity
     template_name = 'opportunity/create.html'
     fields = ['company', 'sales_manager', 'primary_contact', 'description', 'status']
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('opportunity_list')
     success_message = 'Opportunity successfully created'
 
 class OpportunityListView(ListView):
     model = models.Opportunity
     template_name = 'opportunity/list.html'
-    fields = ['company', 'sales_manager', 'primary_contact', 'description']
+    fields = ['company', 'sales_manager', 'primary_contact', 'description', 'created_at']
+    ordering = '-created_at'
 
 class EmployeeListView(ListView):
     model = models.Employee

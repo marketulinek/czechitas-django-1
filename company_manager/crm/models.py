@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
@@ -59,9 +58,14 @@ class Opportunity(models.Model):
     description = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=2, default='1', choices=status_choices)
     rating = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"[{self.created_at.strftime('%d %b %y,  %a %H:%M:%S')}] {self.company} (sales manager: {self.sales_manager}) / {self.get_status_display().upper()}"
 
     class Meta:
         verbose_name_plural = 'Opportunities'
+        get_latest_by = "created_at"
 
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
