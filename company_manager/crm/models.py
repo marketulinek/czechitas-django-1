@@ -26,7 +26,7 @@ class Company(models.Model):
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     email = models.CharField(max_length=100, null=True, blank=True)
     identification_number = models.CharField(max_length=100)
-    address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
+    address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True, blank=True)
     www = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
@@ -61,7 +61,7 @@ class Opportunity(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"[{self.created_at.strftime('%d %b %y,  %a %H:%M:%S')}] {self.company} (sales manager: {self.sales_manager}) / {self.get_status_display().upper()}"
+        return f"{self.company} - {self.description}"
 
     class Meta:
         verbose_name_plural = 'Opportunities'
@@ -74,7 +74,7 @@ class Employee(models.Model):
     supervisor = models.ForeignKey("Employee", on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return f'[{self.department}] {self.user.username}'
+        return f'{self.user.last_name} {self.user.first_name}'
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
