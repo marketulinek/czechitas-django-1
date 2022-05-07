@@ -10,7 +10,7 @@ class CompanyAdmin(admin.ModelAdmin):
 
 class OpportunityAdmin(admin.ModelAdmin):
     fields = ['company', 'sales_manager', 'description', 'status', 'rating', 'created_at']
-    readonly_fields = ['rating', 'created_at']
+    readonly_fields = ['rating', 'rating', 'created_at']
     list_display = ['created_at', 'company', 'sales_manager', 'description', 'status', 'rating']
     list_filter = ['sales_manager', 'status']
     search_fields = ['company', 'sales_manager', 'description']
