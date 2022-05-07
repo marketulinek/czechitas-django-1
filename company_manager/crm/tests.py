@@ -1,15 +1,16 @@
 from django.test import TestCase
 from django.test.client import Client
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.urls import reverse
+from crm.models import Company, Opportunity
 
-from crm.models import Company
 
 class CRMViewTest(TestCase):
 
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_user('tester', 'tester@testing.cz', 'test')
+        self.user.user_permissions.add(Permission.objects.get(codename='add_opportunity'))
         Company.objects.create(name='THE MAMA AI', phone_number='123', identification_number='87654321')
 
     def test_get_company_create(self):
@@ -35,3 +36,13 @@ class CRMViewTest(TestCase):
         self.client.login(username='tester', password='test')
         response = self.client.get(reverse('company_list'))
         self.assertContains(response, 'THE MAMA AI')
+
+    def test_post_opportunity_create(self):
+        self.client.login(username='tester', password='test')
+        response = self.client.post(reverse('opportunity_create'), data={
+            'company': '1',
+            'sales_manager': '1',
+            'status': '1'
+            }, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Opportunity.objects.count(), 1)
