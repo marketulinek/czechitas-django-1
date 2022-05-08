@@ -18,7 +18,7 @@ class OpportunityAdmin(admin.ModelAdmin):
 class EmployeeAdmin(admin.ModelAdmin):
     fields = ['user', 'department', 'supervisor']
     readonly_fields = ['user']
-    list_display = ['__str__', 'department', 'supervisor']
+    list_display = ['__str__', 'department', 'supervisor', 'start_date', 'end_date']
     list_filter = ['department']
     search_fields = ['user__last_name', 'user__first_name', 'department']
 
