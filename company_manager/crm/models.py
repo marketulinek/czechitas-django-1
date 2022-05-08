@@ -73,7 +73,7 @@ class Opportunity(models.Model):
 class Employee(models.Model):
 
     def get_one_year_from_today():
-        return  datetime.today() + timedelta(days=365)
+        return  datetime.today() + timedelta(days=364)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=100, blank=True, null=True)
