@@ -1,8 +1,11 @@
+import django
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
+from datetime import timedelta, datetime
+from time import timezone
 
 
 class Address(models.Model):
@@ -68,10 +71,17 @@ class Opportunity(models.Model):
         get_latest_by = "created_at"
 
 class Employee(models.Model):
+
+    def get_one_year_from_today():
+        return  datetime.today() + timedelta(days=365)
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=100, blank=True, null=True)
     office_number = models.CharField(max_length=20, blank=True, null=True)
     supervisor = models.ForeignKey("Employee", on_delete=models.SET_NULL, null=True, blank=True)
+    start_date = models.DateField(auto_now_add=True)
+    #start_date = models.DateField(default=django.utils.timezone.now)
+    end_date = models.DateField(default=get_one_year_from_today())
 
     def __str__(self):
         return f'{self.user.last_name} {self.user.first_name}'
