@@ -1,16 +1,18 @@
 from django.views.generic import CreateView, ListView, TemplateView, UpdateView
-import crm.models as models
-from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+
+import crm.models as models
+from crm.forms import CompanyForm
+
 
 class IndexView(TemplateView):
     template_name = 'index.html'
 
 class CompanyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = models.Company
+    form_class = CompanyForm
     template_name = 'company/create_company.html'
-    fields = ['name', 'status', 'phone_number', 'email', 'identification_number']
     success_url = reverse_lazy('company_list')
     success_message = 'Company successfully created'
 

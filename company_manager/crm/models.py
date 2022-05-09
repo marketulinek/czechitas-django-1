@@ -98,3 +98,4 @@ def create_opportunity(sender, instance, created, **kwargs):
         from_email = 'robot@cm.cz'
         recipient_list = ['sales_manager@czechitas.cz']
         send_mail(subject, message, from_email, recipient_list)
+        
