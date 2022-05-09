@@ -1,6 +1,6 @@
 # Czechitas - Django 1
 
-:mortar_board: Training project of Django semestral course - ongoing :hammer:
+:mortar_board: Project of Django semestral course for learning and practising purposes - ongoing :hammer:
 
 > Company Manager System for managing business cases
 
