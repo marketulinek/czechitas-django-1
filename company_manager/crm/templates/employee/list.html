@@ -17,6 +17,7 @@
                 <th scope="col">Department</th>
                 <th scope="col">Office number</th>
                 <th scope="col">Supervisor</th>
+                <th scope="col">Active</th>
                 <th></th>
             </tr>
         </thead>
@@ -29,6 +30,7 @@
                     <td>{% firstof item.department '-' %}</td>
                     <td>{% firstof item.office_number '-' %}</td>
                     <td>{% firstof item.supervisor '-' %}</td>
+                    <td>{{ item.is_active }}</td>
                     <td>
                         {% if item.user == user %}
                         <a class="btn btn-company btn-sm" href="{% url 'update_employee' %}" role="button">
