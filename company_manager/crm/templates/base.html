@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -55,21 +56,21 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'company_list' %}">Companies</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'company_list' %}">{% trans 'Companies' %}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'opportunity_list' %}">Opportunities</a>
+                <a class="nav-link" href="{% url 'opportunity_list' %}">{% trans 'Opportunities' %}</a>
               </li>
               <li class="nav-item disabled">
-                <a class="nav-link disabled">Addresses</a>
+                <a class="nav-link disabled">{% trans 'Addresses' %}</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Internal Departments
+                  {% trans 'Internal Departments' %}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Sales</a></li>
-                  <li><a class="dropdown-item" href="#">Human Resources</a></li>
+                  <li><a class="dropdown-item" href="#">{% trans 'Sales' %}</a></li>
+                  <li><a class="dropdown-item" href="#">{% trans 'Human Resources' %}</a></li>
                   <li><a class="dropdown-item" href="#">IT</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="{% url 'employee_list' %}">All</a></li>
@@ -82,11 +83,11 @@
                   {{ user.username }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="btnLoggedUser">
-                  <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
+                  <li><a class="dropdown-item" href="{% url 'logout' %}">{% trans 'Sign out' %}</a></li>
                 </ul>
               </div>
             {% else %}
-              <a class="nav-link" href="{% url 'login' %}">Log in</a>
+              <a class="nav-link" href="{% url 'login' %}">{% trans 'Sign in' %}</a>
             {% endif %}
             <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="What are you looking for?" aria-label="Search">

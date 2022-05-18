@@ -1,10 +1,10 @@
-import django
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from datetime import timedelta, datetime
+from django.utils.translation import gettext_lazy as _
 
 
 class Address(models.Model):
@@ -12,6 +12,10 @@ class Address(models.Model):
     zip_code = models.CharField(max_length=10, blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, null=True)
     country = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('Address')
+        verbose_name_plural = _('Adressses')
 
 class Company(models.Model):
     status_choices = (
@@ -23,11 +27,11 @@ class Company(models.Model):
         ('I', 'Inactive')
     )
     
-    name = models.CharField(max_length=50)
+    name = models.CharField(_('Name'), max_length=50)
     status = models.CharField(max_length=2, default='N', choices=status_choices)
-    phone_number = models.CharField(max_length=20, null=True, blank=True)
-    email = models.CharField(max_length=100, null=True, blank=True)
-    identification_number = models.CharField(max_length=100)
+    phone_number = models.CharField(_('Phone number'), max_length=20, null=True, blank=True)
+    email = models.CharField('E-mail', max_length=100, null=True, blank=True)
+    identification_number = models.CharField(_('Identification number'), max_length=100)
     address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True, blank=True)
     www = models.CharField(max_length=100, null=True, blank=True)
 
