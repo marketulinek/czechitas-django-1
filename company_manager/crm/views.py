@@ -15,7 +15,7 @@ class CompanyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = CompanyForm
     template_name = 'company/create_company.html'
     success_url = reverse_lazy('company_list')
-    success_message = 'Company successfully created'
+    success_message = _('Company successfully created')
 
 class CompanyListView(LoginRequiredMixin, ListView):
     model = models.Company
@@ -46,7 +46,7 @@ class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     fields = ['department', 'office_number', 'supervisor']
     template_name = 'employee/update_employee.html'
     success_url = reverse_lazy('index')
-    success_message = 'Data was updated successfully'
+    success_message = _('Data was updated successfully')
 
     # The logged-in user can edit himself 
     def get_object(self, queryset=None):

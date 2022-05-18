@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'employee_list' %}">Employee List</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans 'Home' %}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'employee_list' %}">{% trans 'Employee List' %}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{% trans 'Edit' %}</li>
         </ol>
     </nav>
 
@@ -14,6 +15,6 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-company">Save</button>
+        <button type="submit" class="btn btn-company">{% trans 'Save' %}</button>
     </form>
 {% endblock %}
