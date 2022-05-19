@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
-from datetime import timedelta, datetime
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from random import randrange
 
 
 class Address(models.Model):
@@ -83,14 +84,14 @@ class Opportunity(models.Model):
 class Employee(models.Model):
 
     def get_one_year_from_today():
-        return  datetime.today() + timedelta(days=364)
+        return timezone.now() + timezone.timedelta(days=364)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    card_number = models.CharField(max_length=9, unique=True, null=True)
     department = models.CharField(_('Department'), max_length=100, blank=True, null=True)
     office_number = models.CharField(_('Office Number'), max_length=20, blank=True, null=True)
     supervisor = models.ForeignKey("Employee", on_delete=models.SET_NULL, null=True, blank=True)
     start_date = models.DateField(_('Start Date'), auto_now_add=True)
-    #start_date = models.DateField(default=django.utils.timezone.now)
     end_date = models.DateField(_('End Date'), default=get_one_year_from_today())
 
     def __str__(self):
@@ -100,10 +101,24 @@ class Employee(models.Model):
         verbose_name = _('Employee')
         verbose_name_plural = _('Employees')
 
+    @property
+    def is_active(self):
+        return self.end_date is None or self.end_date >= timezone.now().date()
+
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Employee.objects.create(user=instance)
+        card_number_exist = True
+        while card_number_exist:
+
+            new_card_number = ''
+            for i in range(9):
+                new_card_number += str(randrange(10))
+
+            card_number_exist = Employee.objects.filter(card_number=new_card_number).exists()
+        else:
+            Employee.objects.create(user=instance, card_number=new_card_number)
 
 @receiver(post_save, sender=Opportunity)
 def create_opportunity(sender, instance, created, **kwargs):
