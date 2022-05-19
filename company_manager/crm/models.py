@@ -39,6 +39,7 @@ class Company(models.Model):
         return self.name
     
     class Meta:
+        verbose_name = _('Company')
         verbose_name_plural = _('Companies')
 
 class Contact(models.Model):
@@ -47,6 +48,10 @@ class Contact(models.Model):
     last_name = models.CharField(_('Last Name'), max_length=100)
     phone_number = models.CharField(_('Phone Number'), max_length=20)
     email = models.CharField('E-mail', max_length=50)
+
+    class Meta:
+        verbose_name = _('Contact')
+        verbose_name_plural = _('Contacts')
 
 class Opportunity(models.Model):
     status_choices = (
@@ -70,7 +75,9 @@ class Opportunity(models.Model):
         return f"{self.company} - {self.description}"
 
     class Meta:
+        verbose_name = _('Opportunity')
         verbose_name_plural = _('Opportunities')
+
         get_latest_by = "created_at"
 
 class Employee(models.Model):
@@ -88,6 +95,10 @@ class Employee(models.Model):
 
     def __str__(self):
         return f'{self.user.last_name} {self.user.first_name}'
+
+    class Meta:
+        verbose_name = _('Employee')
+        verbose_name_plural = _('Employees')
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

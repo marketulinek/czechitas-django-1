@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-18 21:59+0200\n"
+"POT-Creation-Date: 2022-05-19 16:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,7 +51,7 @@ msgstr "Nová"
 msgid "Lead"
 msgstr "Lead"
 
-#: .\crm\models.py:24
+#: .\crm\models.py:24 .\crm\models.py:78
 msgid "Opportunity"
 msgstr "Příležitost"
 
@@ -79,77 +79,97 @@ msgstr "Tel. číslo"
 msgid "Identification number"
 msgstr "IČO"
 
-#: .\crm\models.py:42 .\crm\templates\base.html:59
+#: .\crm\models.py:42 .\crm\templates\opportunity\list.html:19
+msgid "Company"
+msgstr "Firma"
+
+#: .\crm\models.py:43 .\crm\templates\base.html:59
 msgid "Companies"
 msgstr "Firmy"
 
-#: .\crm\models.py:46 .\crm\templates\employee\list.html:17
+#: .\crm\models.py:47 .\crm\templates\employee\list.html:17
 msgid "First Name"
 msgstr "Jméno"
 
-#: .\crm\models.py:47 .\crm\templates\employee\list.html:16
+#: .\crm\models.py:48 .\crm\templates\employee\list.html:16
 msgid "Last Name"
 msgstr "Příjmení"
 
-#: .\crm\models.py:48 .\crm\templates\company\list.html:19
+#: .\crm\models.py:49 .\crm\templates\company\list.html:19
 msgid "Phone Number"
 msgstr "Tel. číslo"
 
-#: .\crm\models.py:53
+#: .\crm\models.py:53 .\crm\templates\opportunity\list.html:21
+msgid "Contact"
+msgstr "Kontakt"
+
+#: .\crm\models.py:54
+msgid "Contacts"
+msgstr "Kontakty"
+
+#: .\crm\models.py:58
 msgid "Prospecting"
 msgstr "Prosperující"
 
-#: .\crm\models.py:54
+#: .\crm\models.py:59
 msgid "Analysis"
 msgstr "Analýza"
 
-#: .\crm\models.py:55
+#: .\crm\models.py:60
 msgid "Proposal"
 msgstr "Nabídka"
 
-#: .\crm\models.py:56
+#: .\crm\models.py:61
 msgid "Negotiation"
 msgstr "Vyjednávání"
 
-#: .\crm\models.py:57
+#: .\crm\models.py:62
 msgid "Closed Won"
 msgstr "Vyhráno - uzavřeno"
 
-#: .\crm\models.py:58
+#: .\crm\models.py:63
 msgid "Closed Lost"
 msgstr "Nevyhráno - uzavřeno"
 
-#: .\crm\models.py:64 .\crm\templates\opportunity\list.html:22
+#: .\crm\models.py:69 .\crm\templates\opportunity\list.html:22
 msgid "Description"
 msgstr "Popis"
 
-#: .\crm\models.py:66
+#: .\crm\models.py:71
 msgid "Rating"
 msgstr "Hodnocení"
 
-#: .\crm\models.py:67
+#: .\crm\models.py:72
 msgid "Created at"
 msgstr "Vytvořeno"
 
-#: .\crm\models.py:73 .\crm\templates\base.html:62
+#: .\crm\models.py:79 .\crm\templates\base.html:62
 msgid "Opportunities"
 msgstr "Příležitosti"
 
-#: .\crm\models.py:82 .\crm\templates\employee\list.html:18
+#: .\crm\models.py:89 .\crm\templates\employee\list.html:18
 msgid "Department"
 msgstr "Oddělení"
 
-#: .\crm\models.py:83
+#: .\crm\models.py:90
 msgid "Office Number"
 msgstr "Tel. číslo"
 
-#: .\crm\models.py:85
+#: .\crm\models.py:92
 msgid "Start Date"
 msgstr "Začátek"
 
-#: .\crm\models.py:87
+#: .\crm\models.py:94
 msgid "End Date"
 msgstr "Konec"
+
+#: .\crm\models.py:100
+msgid "Employee"
+msgstr "Zaměstnanec"
+
+#: .\crm\models.py:101
+msgid "Employees"
+msgstr "Zaměstnanci"
 
 #: .\crm\templates\base.html:65
 msgid "Addresses"
@@ -231,6 +251,10 @@ msgstr "Uložit"
 msgid "Welcome in"
 msgstr "Vítejte v systému"
 
+#: .\crm\templates\index.html:7
+msgid "This system helps company to be efficient in its business project."
+msgstr "Tento systém pomáhá firmě být efektivní v obchodních záležitostech."
+
 #: .\crm\templates\opportunity\create.html:5
 msgid "New Opportunity"
 msgstr "Nová příležitost"
@@ -243,17 +267,9 @@ msgstr "Seznam příležitostí"
 msgid "Started at"
 msgstr "Začátek"
 
-#: .\crm\templates\opportunity\list.html:19
-msgid "Company"
-msgstr "Firmy"
-
 #: .\crm\templates\opportunity\list.html:20
 msgid "Sales Manager"
 msgstr "Obchodník"
-
-#: .\crm\templates\opportunity\list.html:21
-msgid "Contact"
-msgstr "Kontakt"
 
 #: .\crm\templates\registration\password_reset_done.html:5
 msgid "Password Reset Finished"
