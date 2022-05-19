@@ -1,18 +1,21 @@
 from django.views.generic import CreateView, ListView, TemplateView, UpdateView
-import crm.models as models
-from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
+
+import crm.models as models
+from crm.forms import CompanyForm
+
 
 class IndexView(TemplateView):
     template_name = 'index.html'
 
 class CompanyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = models.Company
+    form_class = CompanyForm
     template_name = 'company/create_company.html'
-    fields = ['name', 'status', 'phone_number', 'email', 'identification_number']
     success_url = reverse_lazy('company_list')
-    success_message = 'Company successfully created'
+    success_message = _('Company successfully created')
 
 class CompanyListView(LoginRequiredMixin, ListView):
     model = models.Company
@@ -25,7 +28,8 @@ class OpportunityCreateView(PermissionRequiredMixin, SuccessMessageMixin, Create
     template_name = 'opportunity/create.html'
     fields = ['company', 'sales_manager', 'primary_contact', 'description', 'status']
     success_url = reverse_lazy('opportunity_list')
-    success_message = 'Opportunity successfully created'
+    # Translators: This message is shown after successful creation of a company
+    success_message = _('Opportunity successfully created')
 
 class OpportunityListView(ListView):
     model = models.Opportunity
@@ -42,7 +46,7 @@ class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     fields = ['department', 'office_number', 'supervisor']
     template_name = 'employee/update_employee.html'
     success_url = reverse_lazy('index')
-    success_message = 'Data was updated successfully'
+    success_message = _('Data was updated successfully')
 
     # The logged-in user can edit himself 
     def get_object(self, queryset=None):

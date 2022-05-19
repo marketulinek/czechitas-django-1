@@ -50,6 +50,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Translation
+    "django.middleware.locale.LocaleMiddleware",
 ]
 
 ROOT_URLCONF = 'company_manager.urls'
@@ -133,3 +136,10 @@ EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = config('EMAIL_PORT')
+
+# Setting for translations
+LOCALE_PATHS = ['locale']
+LANGUAGES = [
+    ['en', 'English'],
+    ['cs', 'Čeština']
+]
