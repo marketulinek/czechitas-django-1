@@ -28,9 +28,13 @@
                 <tr>
                     <td>{{ item.created_at }}</td>
                     <td>{{ item.company }}</td>
-                    <td>{{ item.sales_manager }}</td>
-                    <td>{% firstof item.primary_contact '-' %}</td>
-                    <td>{% firstof item.description '-' %}</td>
+                    {% if user.is_authenticated %}
+                        <td>{{ item.sales_manager }}</td>
+                        <td>{% firstof item.primary_contact '-' %}</td>
+                        <td>{% firstof item.description '-' %}</td>
+                    {% else %}
+                        <td colspan="3" class="text-center fst-italic fw-light col-see-more">{% trans 'Sign in to see more' %}</td>
+                    {% endif %}
                     <td>{{ item.get_status_display }}</td>
                 </tr>
             {% endfor %}

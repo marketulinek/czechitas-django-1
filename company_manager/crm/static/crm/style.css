@@ -30,8 +30,22 @@ h2 { font-family: "Courier New"; margin-top: 20px; }
   background-image: linear-gradient(to bottom right, #e6007e, #8D007E, #00007E);
   color: white;
 }
+.btn-company-fill {
+    background-image: linear-gradient(to bottom right, #e6007e, #8D007E, #00007E);
+    background-color: #8D007E;
+    border-color: #8D007E;
+    font-weight: bold;
+    color: white;
+}
+.btn-company-fill:hover { background-image: none; background-color: white; }
 
 #btnLoggedUser { border: none; }
 #btnLoggedUser:hover { background-color: inherit; color: white; }
 
 .table-hover tbody tr:hover { background-color: rgba(141, 0, 126, 0.1); }
+
+.modal-header h5 { font-family: "Courier New"; }
+
+td.col-see-more { background-color: #F5E8E7; }
+
+.card-sign-in { border-color: #00007E; }

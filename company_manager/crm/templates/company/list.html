@@ -7,8 +7,40 @@
             <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z"/>
         </svg>
         {% trans 'Company List' %}
-        <a class="btn btn-company btn-sm" href="{% url 'company_create' %}" role="button">+ {% trans 'Add' %}</a>
+
+        {% if user.is_authenticated %}
+          <a class="btn btn-company btn-sm" href="{% url 'company_create' %}" role="button">+ {% trans 'Add' %}</a>
+        {% else %}
+          <button type="button" class="btn btn-company btn-sm" data-bs-toggle="modal" data-bs-target="#signIn">
+            + {% trans 'Add' %}
+          </button>
+        {% endif %}
     </h2>
+
+    {% if not user.is_authenticated %}
+    <!-- Out of tag h2 -->
+      <div class="modal fade" id="signIn" tabindex="-1" aria-labelledby="signInLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="signInLabel">{% trans 'Please' %},</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center fs-6">
+              {% trans 'for this action...' %}
+            </div>
+            <div class="modal-footer">
+              <a class="btn btn-company-fill" href="{% url 'login' %}" role="button">
+                {% trans 'Sign in' %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-right" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M6.776 1.553a.5.5 0 0 1 .671.223l3 6a.5.5 0 0 1 0 .448l-3 6a.5.5 0 1 1-.894-.448L9.44 8 6.553 2.224a.5.5 0 0 1 .223-.671z"/>
+                </svg>
+              </a>
+            </div>          
+          </div>
+        </div>
+      </div>
+    {% endif %}
 
     <table class="table table-hover">
         <thead>
@@ -27,9 +59,13 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ item.name }}</td>
                 <td>{{ item.get_status_display }}</td>
-                <td>{% firstof item.phone_number '-' %}</td>
-                <td>{% firstof item.email '-' %}</td>
-                <td>{% firstof item.address '-' %}</td>
+                {% if user.is_authenticated %}
+                  <td>{% firstof item.phone_number '-' %}</td>
+                  <td>{% firstof item.email '-' %}</td>
+                  <td>{% firstof item.address '-' %}</td>
+                {% else %}
+                  <td colspan="3" class="text-center fst-italic fw-light col-see-more">{% trans 'Sign in to see more' %}</td>
+                {% endif %}
               </tr>
             {% empty %}
               <tr colspan="6"><td>{% trans 'This list is empty' %}.</td></tr>
