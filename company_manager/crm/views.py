@@ -17,7 +17,7 @@ class CompanyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('company_list')
     success_message = _('Company successfully created')
 
-class CompanyListView(LoginRequiredMixin, ListView):
+class CompanyListView(ListView):
     model = models.Company
     template_name = 'company/list.html'
     fields = ['name', 'status', 'phone_number', 'email', 'address']
@@ -37,7 +37,7 @@ class OpportunityListView(ListView):
     fields = ['company', 'sales_manager', 'primary_contact', 'description', 'created_at']
     ordering = '-created_at'
 
-class EmployeeListView(ListView):
+class EmployeeListView(LoginRequiredMixin, ListView):
     model = models.Employee
     template_name = 'employee/list.html'
     fields = ['department', 'office_number', 'supervisor']
