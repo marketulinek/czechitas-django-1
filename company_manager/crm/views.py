@@ -51,3 +51,8 @@ class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     # The logged-in user can edit himself 
     def get_object(self, queryset=None):
         return self.request.user.employee
+
+class RegisterView(CreateView):
+    form_class = RegisterView
+    success_url = reverse_lazy('login')
+    template_name = 

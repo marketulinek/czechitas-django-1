@@ -1,5 +1,9 @@
-from django.forms import ModelForm, ValidationError
+from dataclasses import field
+from django.forms import CharField, ModelForm, ValidationError
 from crm.models import Company
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.forms import CharField, ModelForm
 
 
 class CompanyForm(ModelForm):
@@ -38,3 +42,10 @@ class CompanyForm(ModelForm):
     class Meta:
         model = Company
         fields = ['name', 'status', 'phone_number', 'email', 'identification_number']
+
+class RegisterUserForm(UserCreationForm):
+    username = CharField(label='Email')
+
+    class Meta:
+        model = User
+        fields = ('username', 'password1', 'password2')

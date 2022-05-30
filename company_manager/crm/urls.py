@@ -14,5 +14,7 @@ urlpatterns = [
 
     # Employee
     path('employee/update/', views.EmployeeUpdateView.as_view(), name='update_employee'),
-    path('employee/', views.EmployeeListView.as_view(), name='employee_list')
+    path('employee/', views.EmployeeListView.as_view(), name='employee_list'),
+
+    path('register', views.RegisterView.as_view(), name='register'),
 ]
