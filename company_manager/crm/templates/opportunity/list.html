@@ -40,4 +40,24 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <canvas id="graph"></canvas>
+{% endblock %}
+
+{%block scripts %}
+<script>
+    $(document).ready(function() {
+        var ctx = document.getElementById('graph').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [{%for row in qs %}'{{ row.company__name }}',{% endfor %}],
+                datasets: [{
+                    label: 'Rating of Opportunity',
+                    data: [{%for row in qs %}{{ row.value }},{% endfor %}]
+                }]
+            }
+        })
+    });
+</script>
 {% endblock %}

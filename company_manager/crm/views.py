@@ -11,6 +11,14 @@ from crm.forms import CompanyForm
 class IndexView(TemplateView):
     template_name = 'index.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['qs'] = models.Opportunity.objects.filter(rating__isnull=False)
+
+        # TODO: get_status_display
+        context['qs2'] = models.Opportunity.objects.filter(status__isnull=False).values('status').annotate(value=Sum('status'))
+        return context
+
 class CompanyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = CompanyForm
     template_name = 'company/create_company.html'
@@ -31,11 +39,18 @@ class OpportunityCreateView(PermissionRequiredMixin, SuccessMessageMixin, Create
     # Translators: This message is shown after successful creation of a company
     success_message = _('Opportunity successfully created')
 
+from django.db.models import Sum
+
 class OpportunityListView(ListView):
     model = models.Opportunity
     template_name = 'opportunity/list.html'
     fields = ['company', 'sales_manager', 'primary_contact', 'description', 'created_at']
     ordering = '-created_at'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['qs'] = self.object_list.filter(rating__isnull=False).values('company__name').annotate(value=Sum('rating'))
+        return context
 
 class EmployeeListView(LoginRequiredMixin, ListView):
     model = models.Employee
