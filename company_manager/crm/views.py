@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
-from company_manager.crm.forms import RegisterUserForm
+from crm.forms import RegisterUserForm
 
 import crm.models as models
 from crm.forms import CompanyForm
