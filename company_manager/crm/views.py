@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
+from company_manager.crm.forms import RegisterUserForm
 
 import crm.models as models
 from crm.forms import CompanyForm
@@ -53,6 +54,6 @@ class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return self.request.user.employee
 
 class RegisterView(CreateView):
-    form_class = RegisterView
+    form_class = RegisterUserForm
     success_url = reverse_lazy('login')
-    template_name = 
+    template_name = 'registration/register.html'
