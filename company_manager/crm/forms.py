@@ -1,11 +1,10 @@
-from dataclasses import field
-from django.forms import CharField, ModelForm, ValidationError
-from crm.models import Company
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.forms import CharField, ModelForm
+from django.forms import CharField, ModelForm, ValidationError
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, ButtonHolder, Submit
+from django.utils.translation import gettext as _
+from crm.models import Company
 
 
 class CompanyForm(ModelForm):
@@ -58,7 +57,7 @@ class CompanyForm(ModelForm):
                 css_class='row'
             ),
             ButtonHolder(
-                Submit('submit', 'Save', css_class='button')
+                Submit('submit', _('Create'), css_class='btn-crispy btn-company-fill')
             )
         )
 
