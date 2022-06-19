@@ -4,7 +4,7 @@ from django.forms import CharField, ModelForm, ValidationError
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, ButtonHolder, Submit
 from django.utils.translation import gettext as _
-from crm.models import Company
+from crm.models import Company, Opportunity
 
 
 class CompanyForm(ModelForm):
@@ -54,6 +54,28 @@ class CompanyForm(ModelForm):
                 Div('identification_number', css_class='col-4'),
                 Div('email', css_class='col-3'),
                 Div('phone_number', css_class='col-4'),
+                css_class='row'
+            ),
+            ButtonHolder(
+                Submit('submit', _('Create'), css_class='btn-crispy btn-company-fill')
+            )
+        )
+
+class OpportunityForm(ModelForm):
+    class Meta:
+        model = Opportunity
+        fields = ['company', 'sales_manager', 'primary_contact', 'description', 'status']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Div(
+                Div('company', css_class='col-2'),
+                Div('sales_manager', css_class='col-2'),
+                Div('primary_contact', css_class='col-2'),
+                Div('status', css_class='col-2'),
+                Div('description', css_class='col-6'),
                 css_class='row'
             ),
             ButtonHolder(
