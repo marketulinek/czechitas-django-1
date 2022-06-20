@@ -3,8 +3,8 @@ from crm.models import Opportunity
 
 
 class OpportunityTable(tables.Table):
-    company = tables.LinkColumn
 
     class Meta:
         model = Opportunity
-        fields = ('company', 'sales_manager', 'status')
+        fields = ('created_at', 'company', 'sales_manager', 'primary_contact', 'description', 'status')
+        attrs = {"class": "table table-hover"}

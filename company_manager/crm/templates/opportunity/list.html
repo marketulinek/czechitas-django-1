@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load render_table from django_tables2 %}
 
 {% block content %}
     <h2>
@@ -12,32 +13,5 @@
         {% endif %}
     </h2>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">{% trans 'Started at' %}</th>
-                <th scope="col">{% trans 'Company' %}</th>
-                <th scope="col">{% trans 'Sales Manager' %}</th>
-                <th scope="col">{% trans 'Contact' %}</th>
-                <th scope="col">{% trans 'Description' %}</th>
-                <th scope="col">Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in object_list %}
-                <tr>
-                    <td>{{ item.created_at }}</td>
-                    <td>{{ item.company }}</td>
-                    {% if user.is_authenticated %}
-                        <td>{{ item.sales_manager }}</td>
-                        <td>{% firstof item.primary_contact '-' %}</td>
-                        <td>{% firstof item.description '-' %}</td>
-                    {% else %}
-                        <td colspan="3" class="text-center fst-italic fw-light col-see-more">{% trans 'Sign in to see more' %}</td>
-                    {% endif %}
-                    <td>{{ item.get_status_display }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% render_table table %}
 {% endblock %}
