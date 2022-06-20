@@ -34,17 +34,16 @@ class OpportunityCreateView(PermissionRequiredMixin, SuccessMessageMixin, Create
     # Translators: This message is shown after successful creation of a company
     success_message = _('Opportunity successfully created')
 
-class OpportunityListView(SingleTableView):
+class OpportunityListView(ListView):
     model = models.Opportunity
-    table_class = tables.OpportunityTable
     template_name = 'opportunity/list.html'
-    #fields = ['company', 'sales_manager', 'primary_contact', 'description', 'created_at']
-    #ordering = '-created_at'
+    fields = ['company', 'sales_manager', 'primary_contact', 'description', 'created_at']
+    ordering = '-created_at'
 
-class EmployeeListView(LoginRequiredMixin, ListView):
+class EmployeeListView(LoginRequiredMixin, SingleTableView):
     model = models.Employee
+    table_class = tables.EmployeeTable
     template_name = 'employee/list.html'
-    fields = ['department', 'office_number', 'supervisor']
 
 class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     fields = ['department', 'office_number', 'supervisor']
