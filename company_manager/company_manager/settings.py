@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # External modules
     'crispy_forms',
     'crispy_bootstrap5',
     'django_tables2',
@@ -148,3 +149,9 @@ LANGUAGES = [
     ['en', 'English'],
     ['cs', 'Čeština']
 ]
+
+# Crispy forms Bootstrap 5
+# https://github.com/django-crispy-forms/crispy-bootstrap5
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

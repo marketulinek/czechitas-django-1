@@ -38,6 +38,7 @@ h2 { font-family: "Courier New"; margin-top: 20px; }
     color: white;
 }
 .btn-company-fill:hover { background-image: none; background-color: white; }
+.btn-crispy:hover.btn-company-fill:hover { color: black; }
 
 #btnLoggedUser { border: none; }
 #btnLoggedUser:hover { background-color: inherit; color: white; }
