@@ -4,11 +4,13 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 
-from django_tables2 import SingleTableView
+from django_tables2 import SingleTableMixin
+from django_filters.views import FilterView
 
 from crm.forms import CompanyForm
 import crm.models as models
 import crm.tables as tables
+import crm.filters as filters
 
 
 class IndexView(TemplateView):
@@ -40,10 +42,11 @@ class OpportunityListView(ListView):
     fields = ['company', 'sales_manager', 'primary_contact', 'description', 'created_at']
     ordering = '-created_at'
 
-class EmployeeListView(LoginRequiredMixin, SingleTableView):
+class EmployeeListView(LoginRequiredMixin, SingleTableMixin, FilterView):
     model = models.Employee
     table_class = tables.EmployeeTable
     template_name = 'employee/list.html'
+    filterset_class = filters.EmployeeFilter
 
 class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     fields = ['department', 'office_number', 'supervisor']
