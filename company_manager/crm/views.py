@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
-from django.db.models import Count
+from django.db.models import Count, Sum
 
 import crm.models as models
 from crm.forms import CompanyForm
@@ -53,7 +53,7 @@ class OpportunityListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['qs'] = self.object_list.filter(rating__isnull=False).values('company__name').annotate(value=Sum('rating'))
+        context['qs'] = self.object_list.filter(status__isnull=False).values('status').annotate(value=Sum('status'))
         return context
 
 class EmployeeListView(LoginRequiredMixin, ListView):
