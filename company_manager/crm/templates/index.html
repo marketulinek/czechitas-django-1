@@ -8,25 +8,15 @@
         {% blocktranslate %}This system helps company to be efficient in its business project.{% endblocktranslate %}
     </p>
 
-    <div class="container">
-        <canvas id="graph"></canvas>
-    </div>
-{% endblock %}
-
-{%block scripts %}
-<script>
-    $(document).ready(function() {
-        var ctx = document.getElementById('graph').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: [{%for row in qs%}'{{row.company}}',{%endfor%}],
-                datasets: [{
-                    label: 'Rating of Opportunity',
-                    data: [{%for row in qs%} {{row.status}} ,{%endfor%}]
-                }]
-            }
-        });
-    });
-</script>
+    <br><br>
+    <div class="card welcoming-note">
+        <div class="card-header">
+          Note
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p class="text-center fw-lighter fst-italic">This project is for learning and practising purposes.</p>
+          </blockquote>
+        </div>
+      </div>
 {% endblock %}
