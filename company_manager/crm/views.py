@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
+from django.db.models import Count
 
 import crm.models as models
 from crm.forms import CompanyForm
@@ -13,10 +14,8 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['qs'] = models.Opportunity.objects.filter(rating__isnull=False)
-
+        context['qs'] = models.Opportunity.objects.filter(status__isnull=False)
         # TODO: get_status_display
-        context['qs2'] = models.Opportunity.objects.filter(status__isnull=False).values('status').annotate(value=Sum('status'))
         return context
 
 class CompanyCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -30,6 +29,13 @@ class CompanyListView(ListView):
     template_name = 'company/list.html'
     fields = ['name', 'status', 'phone_number', 'email', 'address']
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['qs'] = models.Company.objects.filter(status__isnull=False).values('status').annotate(count_status=Count('name'))
+        return context
+
+        # https://stackoverflow.com/questions/65445637/django-grouping-data-and-showing-the-choicess-name-in-template
+
 class OpportunityCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     permission_required = 'crm.add_opportunity'
     model = models.Opportunity
@@ -38,8 +44,6 @@ class OpportunityCreateView(PermissionRequiredMixin, SuccessMessageMixin, Create
     success_url = reverse_lazy('opportunity_list')
     # Translators: This message is shown after successful creation of a company
     success_message = _('Opportunity successfully created')
-
-from django.db.models import Sum
 
 class OpportunityListView(ListView):
     model = models.Opportunity

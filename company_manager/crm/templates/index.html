@@ -8,8 +8,9 @@
         {% blocktranslate %}This system helps company to be efficient in its business project.{% endblocktranslate %}
     </p>
 
-    <canvas id="graph"></canvas>
-    <canvas id="graph2"></canvas>
+    <div class="container">
+        <canvas id="graph"></canvas>
+    </div>
 {% endblock %}
 
 {%block scripts %}
@@ -19,22 +20,10 @@
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: [{%for row in qs %}'{{ row.company }}',{% endfor %}],
+                labels: [{%for row in qs%}'{{row.company}}',{%endfor%}],
                 datasets: [{
                     label: 'Rating of Opportunity',
-                    data: [{%for row in qs %}{{ row.rating }},{% endfor %}]
-                }]
-            }
-        });
-
-        var ctx2 = document.getElementById('graph2').getContext('2d');
-        var myChart2 = new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: [{% for row in qs2 %}'{{ row.get_status_display }}',{% endfor %}],
-                datasets: [{
-                    label: 'Opportunity value',
-                    data: [{% for row in qs2 %}{{ row.status }},{% endfor %}]
+                    data: [{%for row in qs%} {{row.status}} ,{%endfor%}]
                 }]
             }
         });
