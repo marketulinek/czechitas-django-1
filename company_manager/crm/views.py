@@ -3,10 +3,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
+from django_tables2 import SingleTableMixin
+from django_filters.views import FilterView
 from django.db.models import Count, Sum
 
+
+from crm.forms import CompanyForm, OpportunityForm, RegisterUserForm
 import crm.models as models
-from crm.forms import CompanyForm
+import crm.tables as tables
+import crm.filters as filters
 
 
 class IndexView(TemplateView):
@@ -38,9 +43,8 @@ class CompanyListView(ListView):
 
 class OpportunityCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     permission_required = 'crm.add_opportunity'
-    model = models.Opportunity
+    form_class = OpportunityForm
     template_name = 'opportunity/create.html'
-    fields = ['company', 'sales_manager', 'primary_contact', 'description', 'status']
     success_url = reverse_lazy('opportunity_list')
     # Translators: This message is shown after successful creation of a company
     success_message = _('Opportunity successfully created')
@@ -56,10 +60,11 @@ class OpportunityListView(ListView):
         context['qs'] = self.object_list.filter(status__isnull=False).values('status').annotate(value=Sum('status'))
         return context
 
-class EmployeeListView(LoginRequiredMixin, ListView):
+class EmployeeListView(LoginRequiredMixin, SingleTableMixin, FilterView):
     model = models.Employee
+    table_class = tables.EmployeeTable
     template_name = 'employee/list.html'
-    fields = ['department', 'office_number', 'supervisor']
+    filterset_class = filters.EmployeeFilter
 
 class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     fields = ['department', 'office_number', 'supervisor']
@@ -70,3 +75,8 @@ class EmployeeUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     # The logged-in user can edit himself 
     def get_object(self, queryset=None):
         return self.request.user.employee
+
+class RegisterView(CreateView):
+    form_class = RegisterUserForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/register.html'
