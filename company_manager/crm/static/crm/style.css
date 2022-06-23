@@ -55,3 +55,9 @@ td.col-see-more { background-color: #F5E8E7; }
     text-decoration: none;
     color: black;
 }
+
+.welcoming-note {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.welcoming-note .card-header { background-color: rgba(141, 0, 126, 0.1); }
